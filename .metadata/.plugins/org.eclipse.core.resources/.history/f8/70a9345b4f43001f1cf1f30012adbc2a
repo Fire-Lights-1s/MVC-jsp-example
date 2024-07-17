@@ -1,0 +1,57 @@
+package com.itwillbs.controller;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+import com.itwillbs.service.MemberService;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class MemberController extends HttpServlet{
+	// servlet 을 가져와서 => servlet 파일이 됨 => 상속 받아옴
+	// HttpServlet 서블릿(처리담당자) 동작원리 => service(), doGet(), doPost() 메서드 자동으로 호출
+	
+	// doGet(), doPost() 재정의 => 메서드 오버라이딩
+	// alt shift s => v
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("doGet");
+		doProcess(request, response);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("doPost");
+		doProcess(request, response);
+	}
+	
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("doProcess");
+		String sPath = request.getServletPath();
+		System.out.println("가상 주소 : " + sPath);
+		if(sPath.equals("/insert.me")) {
+			//response.sendRedirect("member/insert.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("member/insert.jsp");
+			dispatcher.forward(request, response);
+		}//if insert.me
+		if(sPath.equals("/insertPro.me")) {
+			System.out.println("insertPro.me 가상 주소 일치 ");
+			MemberService memberService = new MemberService();
+			
+			response.sendRedirect("insert.me");
+			if(memberService.insertMember(request)) {
+				response.sendRedirect("login.me");
+			}
+		}//if insertPro.me
+		if(sPath.equals("/login.me")) {
+			System.out.println("login.me 가상 주소 일치 ");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("member/login.jsp");
+			
+		}
+	}
+}

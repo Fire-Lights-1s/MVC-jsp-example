@@ -1,0 +1,75 @@
+package com.itwillbs.service;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+public class MemberService {
+	Connection conn;
+	PreparedStatement pstmt;
+	ResultSet rs;
+	public Connection connection() {
+		try {
+			Context init = new InitialContext();
+			DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/MysqlDB");
+			conn = ds.getConnection();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("DB 연결 실패");
+		}
+		return conn;
+	}// connection()
+	
+	public void dbClose(){
+		if(rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}//dbClose()
+	public void insertMember(HttpServletRequest request) throws SQLException {
+		System.out.println("MemberService inserMember()");
+		String id = request.getParameter("id");
+		String pass = request.getParameter("pass");
+		String name = request.getParameter("name");
+		Timestamp date = new Timestamp(System.currentTimeMillis());
+		/*String sql = "insert into members(id, pass, name, date) values(?,?,?,?);";
+		connection();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, member.getParameter("id"));
+		pstmt.setString(2, member.getParameter("pass"));
+		pstmt.setString(3, member.getParameter("name"));
+		pstmt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+		pstmt.executeUpdate();
+		
+		dbClose();*/
+	}// insertMember()
+}

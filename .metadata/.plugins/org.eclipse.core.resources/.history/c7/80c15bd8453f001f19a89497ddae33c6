@@ -1,0 +1,14 @@
+package member2;
+
+import java.sql.Timestamp;
+
+public class MemberDTO2 {
+	private String id;
+	private String pass;
+	private String name;
+	private String name;
+	private String name;
+	private String name;
+	private Timestamp date;
+	
+}

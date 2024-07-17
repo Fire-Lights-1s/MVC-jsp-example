@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/toyCSS.css?after">
+<script type="text/javascript">
+window.onload = function() {
+	var checkID = document.getElementById('checkUnique');
+	var searchAddr = document.getElementById('searchAddress');
+	checkID.onclick = function() {
+		alert('중복확인');
+	}
+	searchAddr.onclick = function() {
+		alert('주소검색');
+	}
+};
+	function showAlert() {
+		alert();
+	}
+</script>
+</head>
+<body>
+	<h1>html/ex3.html</h1>
+	<h1>폼태그연습/3.png</h1>
+	<h1>회원가입 양식</h1>
+	<form action="test1.html" method="post">
+		<table>
+			<tr>
+				<td class="selfINFO">*이름</td>
+				<td><input type="text" name="name" ></td>
+			</tr>
+			<tr>
+				<td class="selfINFO">*주민등록번호</td>
+				<td><div style="padding: 0;" id="width100">
+						<input type="text" name="pn1"> - 
+						<input type="password" name="pn2">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="selfINFO">*회원ID</td>
+				<td><input type="text" name="id">
+					<button type="button" onclick="showAlert()" id="checkUnique">중복확인</button></td>
+			</tr>
+			<tr>
+				<td class="selfINFO">*비밀번호</td>
+				<td><input type="password" name="pwd" ></td>
+			</tr>
+			<tr>
+				<td class="selfINFO">*비밀번호 확인</td>
+				<td><input type="password" name="pwdCheck" ></td>
+			</tr>
+			<tr>
+				<td class="selfINFO">이메일</td>
+				<td><input type="email" name="email"></td>
+			</tr>
+			<tr>
+				<td class="selfINFO">*전화번호</td>
+				<td><input type="text" name="tel"></td>
+			</tr>
+			<tr>
+				<td class="selfINFO">핸드폰 번호</td>
+				<td><input type="text" name="phone"></td>
+			</tr>
+			<tr>
+				<td class="selfINFO">우편번호</td>
+				<td><input type="text" name="postCode">
+					<button type="button" onclick="showAlert()" id="searchAddress">검색</button></td>
+			</tr>
+			<tr>
+				<td class="selfINFO">주소</td>
+				<td><input type="text" name="address" id="width100"></td>
+			</tr>
+			<tr>
+				<td class="selfINFO">상세 주소</td>
+				<td><input type="text" name="addressDetail" id="width100"></td>
+			</tr>
+			<tr>
+				<td class="selfINFO">*회원분류</td>
+				<td><select name="grade">
+						<option value="">선택해주세요</option>
+						<option value="grade1">1등급</option>
+						<option value="grade2">2등급</option>
+						<option value="grade3">3등급</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="가입"> <input
+					type="reset" value="취소"></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

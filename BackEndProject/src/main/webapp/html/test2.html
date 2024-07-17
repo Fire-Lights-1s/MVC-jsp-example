@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/toyCSS.css">
+</head>
+<body>
+	<!-- 
+http://localhost:8080/BackEndProject/html/test1.html?id=asdad&pwd=123123
+test1.html 하이퍼 링크
+id=asdad&pwd=123123 입력한 값을 들고 서버에 요청(폼태그, 양식태그)
+method="get" : 주소줄에 값이 표시됨
+method="post" : 주소줄에 값이 표시 안됨
+
+ -->
+	<h1>html/test2.html</h1>
+	<form action="test1.html" method="post">
+		<table>
+			<tr>
+				<td class="selfINFO">아이디</td>
+				<td><input type="text" name="id" id="width100"></td>
+			</tr>
+			<tr>
+				<td class="selfINFO">비밀번호</td>
+				<td><input type="password" name="pwd" id="width100"></td>
+			</tr>
+			<tr>
+				<td class="selfINFO">자기소개</td>
+				<td><textarea name="intro" rows="10" ></textarea></td>
+			</tr>
+			<tr>
+				<td class="selfINFO">성별</td>
+				<td>
+				<input type="radio" name="gender" value="남">남성 
+				<input type="radio" name="gender" value="여">여성
+				</td>
+			</tr>
+			<tr>
+				<td class="selfINFO">취미</td>
+				<td>
+				<input type="checkbox" name="hobby" value="축구">축구 
+				<input type="checkbox" name="hobby" value="게임">게임
+				<input type="checkbox" name="hobby" value="야구">야구
+				</td>
+			</tr>
+			<tr>
+				<td class="selfINFO">등급(목록)</td>
+				<td>
+				<select name="grade" >
+					<option value="목1">목록1</option>
+					<option value="목2">목록2</option>
+					<option value="목3">목록3</option>
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="selfINFO">파일선택</td>
+				<td><input type="file" name="file"></td>
+			</tr>
+			<tr>
+				<td class="selfINFO">숨긴값 서버 전달</td>
+				<td><input type="hidden" name="hid" value="hidValue"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+				<input type="submit" value="가입(전송, 제출)">
+				<input type="reset" value="초기화">
+				</td>
+			</tr>
+		</table>
+	</form>
+	<a href="test1.html">html/test1.html</a>
+</body>
+</html>

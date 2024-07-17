@@ -1,0 +1,39 @@
+package com.itwillbs.service;
+
+import java.sql.SQLException;
+import java.sql.Timestamp;
+
+import com.itwillbs.dao.MemberDAO;
+import com.itwillbs.domain.MemberDTO;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+public class MemberService {
+	public boolean insertMember(HttpServletRequest request) {
+		boolean result = false;
+		System.out.println("MemberService inserMember()");
+		MemberDTO member = new MemberDTO();
+		member.setId(request.getParameter("id"));
+		member.setPass(request.getParameter("pass"));
+		member.setName(request.getParameter("name"));
+		member.setDate(new Timestamp(System.currentTimeMillis()));
+		
+		MemberDAO memberDAO = new MemberDAO();
+		
+		try {
+			memberDAO.insertMember(member);
+			result = true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("유저 생성 실패");
+			result = false;
+		}
+		return result;
+	}// insertMember()
+	public boolean userCheck() {
+		boolean result = false;
+		
+		return result;
+	}
+}

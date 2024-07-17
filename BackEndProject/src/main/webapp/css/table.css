@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+table {
+	border-collapse: collapse;
+	border: 0;
+}
+caption{
+	font-size: 1.5rem;
+	font-weight: 800;
+}
+th,td {
+	border: 1px solid #aaa;
+	background-clip: padding-box;
+	padding: 0.6rem;
+	min-width: 6rem;
+	text-align: left;
+	margin: 0;
+}
+th{
+	background-color: #e3e3e3;
+	text-align: center;
+	font-weight: 900;
+}
+
+a{
+	text-decoration: none; 
+}
+.input_border,.input_border:focus{
+	outline: none;
+	border:0; 
+}
+.resize_none{
+	margin:0 auto;
+	resize: none;
+}
+a.button {
+  display: block;
+  position: relative;
+  float: left;
+  padding: 0 10px;
+  margin: 0 10px ;
+  font-weight: 600;
+  text-align: center;
+  line-height: 40px;
+  color: #FFF;
+  border-radius: 5px;
+  transition: all 0.2s ;
+  text-decoration: none;
+}
+.btnLightBlue {
+  background: #5DC8CD;
+}
+
+.custom_th{
+	text-align: center;
+	font-weight: 900;
+}
+.fontB{
+	font-weight: 900;
+}
