@@ -79,14 +79,37 @@ public class MemberController extends HttpServlet{
 			response.sendRedirect("login.me");
 		}//if logout.me
 		if(sPath.equals("/info.me")) {
+			System.out.println("info.me 가상 주소 일치 ");
 			HttpSession session = request.getSession();
 			String id = (String) session.getAttribute("id");
+			
 			MemberService memberService = new MemberService();
 			MemberDTO member = memberService.getMember(id);
 			request.setAttribute("memberDTO", member);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("member/info.jsp");
 			dispatcher.forward(request, response);
+		}// if info.me
+		if(sPath.equals("/update.me")) {
+			System.out.println("update.me 가상 주소 일치 ");
+			HttpSession session = request.getSession();
+			String id = (String) session.getAttribute("id");
+			
+			MemberService memberService = new MemberService();
+			MemberDTO member = memberService.getMember(id);
+			request.setAttribute("memberDTO", member);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("member/update.jsp");
+			dispatcher.forward(request, response);
+		}// if update.me
+		if(sPath.equals("/updatePro.me")) {
+			System.out.println("updatePro.me 가상 주소 일치 ");
+			MemberService memberService = new MemberService();
+			if(memberService.updateMember(request)) {
+				response.sendRedirect("main.me");
+			}else {
+				response.sendRedirect("update.me");
+			}
 		}
 	}
 }

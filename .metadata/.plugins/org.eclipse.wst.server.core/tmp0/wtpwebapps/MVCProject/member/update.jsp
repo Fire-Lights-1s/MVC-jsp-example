@@ -1,10 +1,5 @@
-<%@page import="memder.MemberDTO"%>
-<%@page import="memder.MemberDAO"%>
+<%@page import="com.itwillbs.domain.MemberDTO"%>
 <%@page import="java.sql.Timestamp"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="DB_Connector.MyDB_DAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>member/update.jsp</title>
-<link rel="stylesheet" href="../css/table.css?after">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/table.css">
 <%
 	String resultM = (String)session.getAttribute("resultM");
 	session.removeAttribute("resultM");
@@ -28,15 +23,13 @@
 			id = (String) session.getAttribute("id");
 		}
 
-		MemberDAO memberDAO = new MemberDAO();
-		Connection conn = memberDAO.connection();
 
-		MemberDTO member = memberDAO.getMember(id);
+		MemberDTO member = (MemberDTO) request.getAttribute("memberDTO");
 
 		if (member != null) {
 			String name = member.getName();
 	%>
-	<form action="updatePro.jsp" method="post">
+	<form action="updatePro.me" method="post">
 		<table>
 			<%if(!resultM.equals("")){ %>
 			<tr>
@@ -57,7 +50,7 @@
 				<td><input type="text" class="input_border" name="name" value="<%=name%>"></td>
 			</tr>
 			<tr>
-				<td><a href="main.jsp" class="button btnLightBlue">main.jsp 이동</a></td>
+				<td><a href="main.me" class="button btnLightBlue">main.jsp 이동</a></td>
 				<td><input type="submit"  value="회원정보수정"></td>
 			</tr>
 		</table>

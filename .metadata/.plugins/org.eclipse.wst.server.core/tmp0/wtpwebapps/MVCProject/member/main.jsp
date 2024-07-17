@@ -18,14 +18,14 @@
 		<%} %>
 		<tr>
 			<td><a href="info.me" class="button btnLightBlue">개인정보 보기</a></td>
-			<td><a href="update.jsp" class="button btnLightBlue">나의 정보 수정</a></td>
+			<td><a href="update.me" class="button btnLightBlue">나의 정보 수정</a></td>
 		</tr>
 		<tr>
-			<td><a href="../board/write.jsp" class="button btnLightBlue">글쓰기</a></td>
-			<td><a href="../board/list.jsp" class="button btnLightBlue">글목록 보기</a></td>
+			<td><a href="../board/write.me" class="button btnLightBlue">글쓰기</a></td>
+			<td><a href="../board/list.me" class="button btnLightBlue">글목록 보기</a></td>
 		</tr>
 		<tr>
-			<td><a href="delete.jsp" class="button btnLightBlue">나의 정보 삭제</a></td>
+			<td><a href="delete.me" class="button btnLightBlue">나의 정보 삭제</a></td>
 			<td><a href="logout.me" class="button btnLightBlue">로그아웃</a></td>
 		</tr>
 	</table>

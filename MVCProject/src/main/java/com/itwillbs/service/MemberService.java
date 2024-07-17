@@ -94,4 +94,32 @@ public class MemberService {
 		}
 		return member;
 	}// getMember()
+	public boolean updateMember(HttpServletRequest request) {
+		boolean result = false;
+		MemberDTO member = new MemberDTO();
+		MemberDAO memberDAO = new MemberDAO();
+		member.setId(request.getParameter("id"));
+		member.setPass(request.getParameter("pass"));
+		member.setName(request.getParameter("name"));
+		
+		try {
+			MemberDTO memberDB = getMember(member.getId());
+			if(memberDB.getId().equals(member.getId()) &&
+					memberDB.getPass().equals(member.getPass())) {
+				memberDAO.updateMember(member);
+				result = true;
+			}else {
+				HttpSession session = request.getSession();
+				session.setAttribute("resultM", "비밀번호가 일치하지 않음");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("유정 정보 업데이트 실패");
+			HttpSession session = request.getSession();
+			session.setAttribute("resultM", "업데이트 실패");
+			result = false;
+		}
+		return result;
+	}
 }
