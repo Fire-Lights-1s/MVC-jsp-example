@@ -1,0 +1,27 @@
+package com.itwillbs.service;
+
+import java.sql.SQLException;
+
+import com.itwillbs.dao.BoardDAO;
+import com.itwillbs.domain.BoardDTO;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+public class BoardService {
+	BoardDAO boardDAO = new BoardDAO();
+	
+	public boolean insertBoard(HttpServletRequest request) {
+		boolean result = false;
+		BoardDTO board = new BoardDTO();
+		board.setName(request.getParameter("id"));
+		board.setSubject(request.getParameter("subject"));
+		board.setContent(request.getParameter("content"));
+		
+		try {
+			boardDAO.insertBoard(board);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+}

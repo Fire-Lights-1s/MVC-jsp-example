@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>member/delete.jsp</title>
-<link rel="stylesheet" href="../css/table.css?after">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/table.css?after">
 <%
 	String resultM = (String)session.getAttribute("resultM");
 	session.removeAttribute("resultM");
@@ -20,7 +20,7 @@
 		id = (String) session.getAttribute("id");
 	}
 	%>
-	<form action="deletePro.jsp" method="post">
+	<form action="deletePro.me" method="post">
 		<table>
 			<%if(!resultM.equals("")){ %>
 			<tr>
@@ -30,11 +30,11 @@
 			<%} %>
 			<tr>
 				<td>아이디</td>
-				<td><input type="text" name="id" readonly value="<%=id%>"></td>
+				<td><input type="text" name="id" class="input_border" readonly value="<%=id%>"></td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><input type="password" name="pass"></td>
+				<td><input type="password" name="pass" class="input_border"></td>
 			</tr>
 			<tr>
 				<td><a href="main.jsp" class="button btnLightBlue">main.jsp 이동</a></td>

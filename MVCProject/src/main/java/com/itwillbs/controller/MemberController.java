@@ -1,6 +1,7 @@
 package com.itwillbs.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.service.MemberService;
@@ -90,6 +91,7 @@ public class MemberController extends HttpServlet{
 			RequestDispatcher dispatcher = request.getRequestDispatcher("member/info.jsp");
 			dispatcher.forward(request, response);
 		}// if info.me
+		
 		if(sPath.equals("/update.me")) {
 			System.out.println("update.me 가상 주소 일치 ");
 			HttpSession session = request.getSession();
@@ -105,11 +107,42 @@ public class MemberController extends HttpServlet{
 		if(sPath.equals("/updatePro.me")) {
 			System.out.println("updatePro.me 가상 주소 일치 ");
 			MemberService memberService = new MemberService();
-			if(memberService.updateMember(request)) {
+			boolean result = memberService.userCheck(request);
+			if(result) {
+				memberService.updateMember(request);
 				response.sendRedirect("main.me");
 			}else {
 				response.sendRedirect("update.me");
 			}
+		}// if updatePro.me
+		
+		if(sPath.equals("/delete.me")) {
+			System.out.println("delete.me 가상 주소 일치 ");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("member/delete.jsp");
+			dispatcher.forward(request, response);
+		}// if delete.me
+		if(sPath.equals("/deletePro.me")) {
+			System.out.println("deletePro.me 가상 주소 일치 ");
+			MemberService memberService = new MemberService();
+			
+			boolean result = memberService.userCheck(request);
+			if(result) {
+				memberService.deleteMember(request);
+				HttpSession session = request.getSession();
+				session.invalidate();
+				response.sendRedirect("main.me");
+			}else {
+				response.sendRedirect("delete.me");
+			}
+		}// if deletePro.me
+		if(sPath.equals("/list.me")) {
+			System.out.println("list.me 가상 주소 일치 ");
+			MemberService memberService = new MemberService();
+			ArrayList<MemberDTO> memberList = memberService.getMemberList();
+			request.setAttribute("memberList", memberList);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("member/list.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 }

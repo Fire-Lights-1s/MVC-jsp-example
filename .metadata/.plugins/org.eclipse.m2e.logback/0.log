@@ -46,3 +46,7 @@
 2024-07-16 17:48:03,352 [Framework stop - Equinox Container: 93623c70-b73c-4411-8560-4966d4eb2354] INFO  org.eclipse.jetty.server.Server - Stopped oejs.Server@4b1b357d{STOPPING}[12.0.6,sto=0]
 2024-07-16 17:48:03,355 [Framework stop - Equinox Container: 93623c70-b73c-4411-8560-4966d4eb2354] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@46308d7d{HTTP/1.1, (http/1.1)}{0.0.0.0:0}
 2024-07-17 09:02:58,264 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2024-07-18 14:00:41,096 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2024-07-22 13:53:17,650 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2024-07-22 15:26:46,106 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2024-07-23 09:02:19,455 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.

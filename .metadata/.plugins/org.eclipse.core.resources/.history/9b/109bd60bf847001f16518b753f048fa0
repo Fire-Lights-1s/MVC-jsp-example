@@ -1,0 +1,9 @@
+package com.itwillbs.controller;
+
+import java.io.IOException;
+
+import jakarta.servlet.http.HttpServlet;
+
+public class BoardController extends HttpServlet{
+	
+}

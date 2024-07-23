@@ -1,0 +1,51 @@
+package com.itwillbs.service;
+
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+
+import com.itwillbs.dao.BoardDAO;
+import com.itwillbs.domain.BoardDTO;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+public class BoardService {
+	BoardDAO boardDAO = new BoardDAO();
+	
+	public boolean insertBoard(HttpServletRequest request) {
+		boolean result = false;
+		BoardDTO board = new BoardDTO();
+		board.setName(request.getParameter("id"));
+		board.setSubject(request.getParameter("subject"));
+		board.setContent(request.getParameter("content"));
+		board.setNum(1);
+		board.setReadcount(0);
+		board.setDate(new Timestamp(System.currentTimeMillis()));
+		try {
+			board.setNum(boardDAO.checkMaxBoardNum());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("중복 체크 sql 오류");
+		}
+		try {
+			boardDAO.insertBoard(board);
+			result = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("글쓰기 실패");
+			result = false;
+		}
+		return result;
+	}// insertBoard()
+	
+	public ArrayList<BoardDTO> getBoardList(){
+		ArrayList<BoardDTO> boardList = null;
+		try {
+			boardList = boardDAO.getBoardList();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		
+	}
+}

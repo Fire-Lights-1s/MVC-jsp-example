@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>member/main.jsp</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/table.css">
+</head>
+<body>
+	<h1>member/main.jsp</h1>
+	<table>
+	<caption><%= session.getAttribute("id")%>, ${sessionScope.id}</caption>
+	<%if(session.getAttribute("id") != null &&session.getAttribute("id").equals("admin")){ %>
+		<tr>
+			<td colspan="2"><a href="list.me" class="button btnLightBlue">모든 유저정보 보기</a></td>
+		</tr>
+		<%} %>
+		<tr>
+			<td><a href="info.me" class="button btnLightBlue">개인정보 보기</a></td>
+			<td><a href="update.me" class="button btnLightBlue">나의 정보 수정</a></td>
+		</tr>
+		<tr>
+			<td><a href="../board/write.me" class="button btnLightBlue">글쓰기</a></td>
+			<td><a href="../board/list.me" class="button btnLightBlue">글목록 보기</a></td>
+		</tr>
+		<tr>
+			<td><a href="delete.me" class="button btnLightBlue">나의 정보 삭제</a></td>
+			<td><a href="logout.me" class="button btnLightBlue">로그아웃</a></td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -6,6 +6,7 @@
 <%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,38 +26,32 @@
 	out.print("member 리턴값 " + member);
 	%>
 	<table>
-		<%
-		if (member != null) {
-			String pass = member.getPass();
-			String name = member.getName();
-			Timestamp date = member.getDate();
-		%>
+	<c:set var="dto" value="${requestScope.memberDTO}"/>
+	<c:choose>
+		<c:when test="${ ! empty dto }">
 		<tr>
 			<td>아이디</td>
-			<td><%=id%></td>
+			<td>${dto.id}</td>
 		</tr>
 		<tr>
 			<td>비밀번호</td>
-			<td><%=pass%></td>
+			<td>${memberDTO.pass}</td>
 		</tr>
 		<tr>
 			<td>이름</td>
-			<td><%=name%></td>
+			<td>${memberDTO.name}</td>
 		</tr>
 		<tr>
 			<td>가입 날짜</td>
-			<td><%=date%></td>
+			<td>${memberDTO.date}</td>
 		</tr>
-		<%
-		} else {
-		%>
-		<tr>
+		</c:when>
+		<c:otherwise>
+			<tr>
 			<td rowspan="2">로그인 정보 없음</td>
 		</tr>
-
-		<%
-		}
-		%>
+		</c:otherwise>
+	</c:choose>
 	</table>
 	<a href="main.me">main.jsp 이동</a>
 </body>
