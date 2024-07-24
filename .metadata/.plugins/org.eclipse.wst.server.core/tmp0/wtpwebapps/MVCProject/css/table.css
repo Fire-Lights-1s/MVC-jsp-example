@@ -25,6 +25,10 @@ th{
 a{
 	text-decoration: none; 
 }
+#underBar > td{
+	border: 0px solid #aaa;
+	text-align: center;
+}
 .input_border,.input_border:focus{
 	outline: none;
 	border:0; 

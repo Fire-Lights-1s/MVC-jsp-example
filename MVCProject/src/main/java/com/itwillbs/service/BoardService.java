@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import com.itwillbs.dao.BoardDAO;
 import com.itwillbs.domain.BoardDTO;
+import com.itwillbs.domain.PageDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -39,10 +40,36 @@ public class BoardService {
 		return result;
 	}// insertBoard()
 	
-	public ArrayList<BoardDTO> getBoardList(){
-		ArrayList<BoardDTO> boardList = null;
+	public int getBoardCount() {
+		int count=0;
 		try {
-			boardList = boardDAO.getBoardList();
+			count = boardDAO.getBoardCount();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("게시글 개수 조회 실패");
+		}
+		return count;
+	}
+	public PageDTO getPageDTOStartEnd(PageDTO pageDTO) {
+		PageDTO page = pageDTO; 
+		int pageSize = page.getPageSize();
+		int totalPage = (int) Math.ceil(page.getCount() / (double)pageSize);
+		int currentPage = page.getCurrentPage();
+		
+		if(totalPage < currentPage) {
+			currentPage = totalPage;
+			page.setCurrentPage(currentPage);
+		}
+		page.setStartRow((currentPage-1)*pageSize + 1);
+		page.setEndRow(currentPage*pageSize);
+		
+		return page;
+	}
+	public ArrayList<BoardDTO> getBoardList(PageDTO pageDTO){
+		ArrayList<BoardDTO> boardList = null;
+		
+		try {
+			boardList = boardDAO.getBoardList(pageDTO);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			boardList = null;

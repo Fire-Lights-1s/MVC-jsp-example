@@ -1,0 +1,59 @@
+<%@page import="com.itwillbs.domain.BoardDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.io.PrintWriter"%>
+<%@page import="java.io.StringWriter"%>
+<%@page import="java.sql.Timestamp"%>
+<%@page import="java.sql.SQLException"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>board/list.jsp</title>
+<link rel='stylesheet' href="${pageContext.request.contextPath }/css/table.css">
+</head>
+<body>
+	<h1>board/list.jsp</h1>
+	<table>
+		<tr>
+			<td>글번호</td>
+			<td>글쓴이</td>
+			<td>글제목</td>
+			<td>조회수</td>
+			<td>글 작성 날짜</td>
+		</tr>
+		<c:set var="boardList" value="${requestScope.boardList }"></c:set>
+		<c:if test="${! empty boardList }">
+			<c:forEach var="board" items="${boardList}">
+				<tr>
+					<td><a href="content.bo?num=${board.getNum()}">${board.getNum()}</a></td>
+					<td>${board.getName()}</td>
+					<td><a href="content.bo?num=${board.getNum()}">${board.getSubject()}</a></td>
+					<td>${board.getReadCount()}</td>
+					<td>${board.getDate()}</td>
+				</tr>
+			</c:forEach>
+		</c:if>
+	<tr>
+		<td>
+			<a href="main.me">go to main</a>
+		</td>
+		<td>
+			<a href="list.bo?pageNum=1"> 1 </a>
+			<a href="list.bo?pageNum=2"> 2 </a>
+			<a href="list.bo?pageNum=3"> 3 </a>
+			<a href="list.bo?pageNum=4"> 4 </a>
+			<a href="list.bo?pageNum=5"> 5 </a>
+			<a href="list.bo?pageNum=6"> 6 </a>
+			<a href="list.bo?pageNum=7"> 7 </a>
+			<a href="list.bo?pageNum=8"> 8 </a>
+			<a href="list.bo?pageNum=9"> 9 </a>
+			<a href="list.bo?pageNum=10"> 10 </a>
+		</td>
+	</tr>
+	</table>
+	<br>
+</body>
+</html>

@@ -1,0 +1,10 @@
+package com.itwillbs.domain;
+
+public class PageDTO {
+	private int pageSize;
+	private String pageNum;
+	private int currentPage;
+	
+	private int startRow;
+	private int endRow;
+}

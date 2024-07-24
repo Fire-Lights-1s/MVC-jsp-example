@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import com.itwillbs.domain.BoardDTO;
+import com.itwillbs.domain.PageDTO;
 
 public class BoardDAO {
 	Connection conn;
@@ -69,7 +70,7 @@ public class BoardDAO {
 		}
 		dbClose();
 		return maxNum;
-	}
+	}// checkMaxBoardNum()
 	public void insertBoard(BoardDTO board) throws SQLException {
 		String sql = "insert into board(num, name, subject, content, readcount, date) "+
 				"values (?, ?, ?, ?, ?, ?);";
@@ -84,12 +85,25 @@ public class BoardDAO {
 		pstmt.executeUpdate();
 		dbClose();
 	}
-	public ArrayList<BoardDTO> getBoardList() throws SQLException {
-		ArrayList<BoardDTO> boardList = new ArrayList<BoardDTO>();
+	public int getBoardCount() throws SQLException {
 		int count=0;
-		String sql = "select num, name, subject, readCount, date from board order by num desc;";
+		String sql = "select count(*) from board;";
 		connection();
 		pstmt = conn.prepareStatement(sql);
+		rs = pstmt.executeQuery();
+		if(rs.next()) {
+			count = rs.getInt("count(*)");
+		}
+		dbClose();
+		return count;
+	}
+	public ArrayList<BoardDTO> getBoardList(PageDTO pageDTO) throws SQLException {
+		ArrayList<BoardDTO> boardList = new ArrayList<BoardDTO>();
+		String sql = "select * from board order by num desc limit ?, ?;";
+		connection();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, pageDTO.getStartRow()-1);
+		pstmt.setInt(2, pageDTO.getPageSize());
 		rs = pstmt.executeQuery();
 
 		while(rs.next() && rs != null){

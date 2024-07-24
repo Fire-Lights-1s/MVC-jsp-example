@@ -29,4 +29,5 @@
     <fullyQualifiedTypeName name="com.itwillbs.dao.BoardDAO"/>
     <fullyQualifiedTypeName name="jakarta.servlet.http.HttpServletRequest"/>
     <fullyQualifiedTypeName name="jakarta.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="com.itwillbs.domain.PageDTO"/>
 </qualifiedTypeNameHistroy>

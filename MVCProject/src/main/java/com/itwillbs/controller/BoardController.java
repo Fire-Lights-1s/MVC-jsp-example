@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.itwillbs.dao.BoardDAO;
 import com.itwillbs.domain.BoardDTO;
+import com.itwillbs.domain.PageDTO;
 import com.itwillbs.service.BoardService;
 
 import jakarta.servlet.RequestDispatcher;
@@ -46,9 +47,25 @@ public class BoardController extends HttpServlet{
 		}//if writePro.bo
 		if(sPath.equals("/list.bo")){
 			System.out.println("list.bo 가상 주소 일치 ");
+			
+			int pageSize = 10;
+			String pageNum = request.getParameter("pageNum");
+			if(pageNum == null) {
+				pageNum = "1";
+			}
+			int currentPage = Integer.parseInt(pageNum);
+			PageDTO pageDTO = new PageDTO();
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setCurrentPage(currentPage);
+			
 			BoardService boardService = new BoardService();
-			ArrayList<BoardDTO> boardList = boardService.getBoardList();
+			int count = boardService.getBoardCount();
+			pageDTO.setCount(count);
+			pageDTO = boardService.getPageDTOStartEnd(pageDTO);
+			ArrayList<BoardDTO> boardList = boardService.getBoardList(pageDTO);
 			request.setAttribute("boardList", boardList);
+			request.setAttribute("pageDTO", pageDTO);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("board/list.jsp");
 			dispatcher.forward(request, response);

@@ -16,6 +16,10 @@
 </head>
 <body>
 	<h1>board/list.jsp</h1>
+	<a href="write.bo">글쓰기</a>
+	<c:set var="boardList" value="${requestScope.boardList }"></c:set>
+	<c:set var="pageDTO" value="${requestScope.pageDTO }"></c:set>
+	<h2>글목록 [ 글개수 : ${pageDTO.count}]</h2>
 	<table>
 		<tr>
 			<td>글번호</td>
@@ -24,7 +28,6 @@
 			<td>조회수</td>
 			<td>글 작성 날짜</td>
 		</tr>
-		<c:set var="boardList" value="${requestScope.boardList }"></c:set>
 		<c:if test="${! empty boardList }">
 			<c:forEach var="board" items="${boardList}">
 				<tr>
@@ -36,8 +39,17 @@
 				</tr>
 			</c:forEach>
 		</c:if>
+	<tr id="underBar">
+		<td>
+			<a href="main.me">go to main</a>
+		</td>
+		<td colspan="3">
+		<c:forEach var="p" begin="1" end="10" step="1">
+			<a href="list.bo?pageNum=${p}"> ${p} </a>
+		</c:forEach>
+		</td>
+	</tr>
 	</table>
-	<a href="main.me">go to main</a>
 	<br>
 </body>
 </html>
