@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.itwillbs.domain.MemberDTO;
+import com.itwillbs.domain.PageDTO;
+import com.itwillbs.service.BoardService;
 import com.itwillbs.service.MemberService;
 
 import jakarta.servlet.RequestDispatcher;
@@ -138,9 +140,49 @@ public class MemberController extends HttpServlet{
 		if(sPath.equals("/list.me")) {
 			System.out.println("list.me 가상 주소 일치 ");
 			MemberService memberService = new MemberService();
-			ArrayList<MemberDTO> memberList = memberService.getMemberList();
-			request.setAttribute("memberList", memberList);
 			
+			int pageSize = 10;
+			String pageNum = request.getParameter("pageNum");
+			if(pageNum == null) {
+				pageNum = "1";
+			}
+			int currentPage = Integer.parseInt(pageNum);
+			PageDTO pageDTO = new PageDTO();
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setCurrentPage(currentPage);
+			
+			int count = memberService.getMemberCount();
+			pageDTO.setCount(count);
+			pageDTO.getStartEndRow(pageDTO);
+			
+//			int totalPage = (int) Math.ceil(count / (double)pageSize);
+//			
+//			if(totalPage < currentPage) {
+//				currentPage = totalPage;
+//				pageDTO.setCurrentPage(currentPage);
+//			}
+//			pageDTO.setTotalPage(totalPage);
+//			pageDTO.setStartRow((currentPage-1)*pageSize + 1);
+//			pageDTO.setEndRow(currentPage*pageSize);
+			
+			int pageBlock = 10;
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.getStartEndPage(pageDTO);
+//			int startPage = ((currentPage-1)/pageBlock)*pageBlock +1;
+//			int endPage = ((currentPage-1)/pageBlock)*pageBlock+pageBlock;
+//			if(pageDTO.getTotalPage() <startPage ) {
+//				startPage = pageDTO.getTotalPage();
+//			}
+//			if(pageDTO.getTotalPage() <endPage ) {
+//				endPage = pageDTO.getTotalPage();
+//			}
+//			pageDTO.setStartPage(startPage);
+//			pageDTO.setEndPage(endPage);
+			
+			ArrayList<MemberDTO> memberList = memberService.getMemberList(pageDTO);
+			request.setAttribute("memberList", memberList);
+			request.setAttribute("pageDTO", pageDTO);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("member/list.jsp");
 			dispatcher.forward(request, response);
 		}

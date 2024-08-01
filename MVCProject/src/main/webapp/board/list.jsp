@@ -1,3 +1,4 @@
+<%@page import="com.itwillbs.domain.PageDTO"%>
 <%@page import="com.itwillbs.domain.BoardDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.io.PrintWriter"%>
@@ -20,6 +21,7 @@
 	<c:set var="boardList" value="${requestScope.boardList }"></c:set>
 	<c:set var="pageDTO" value="${requestScope.pageDTO }"></c:set>
 	<h2>글목록 [ 글개수 : ${pageDTO.count}]</h2>
+	<h2>글목록 [ 페이지개수 : ${pageDTO.totalPage}]</h2>
 	<table>
 		<tr>
 			<td>글번호</td>
@@ -44,9 +46,15 @@
 			<a href="main.me">go to main</a>
 		</td>
 		<td colspan="3">
-		<c:forEach var="p" begin="1" end="10" step="1">
+		<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+			<a  href="list.bo?pageNum=${pageDTO.getStartPage()-pageDTO.pageBlock}"> 이전</a>
+		</c:if>
+		<c:forEach var="p" begin="${pageDTO.getStartPage()}" end="${pageDTO.getEndPage()}" step="1">
 			<a href="list.bo?pageNum=${p}"> ${p} </a>
 		</c:forEach>
+		<c:if test="${pageDTO.endPage < pageDTO.totalPage }">
+			<a  href="list.bo?pageNum=${pageDTO.getStartPage()+pageDTO.pageBlock}"> 다음</a>
+		</c:if>
 		</td>
 	</tr>
 	</table>

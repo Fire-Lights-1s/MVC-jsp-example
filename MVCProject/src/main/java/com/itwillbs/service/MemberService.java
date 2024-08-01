@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import com.itwillbs.dao.MemberDAO;
 import com.itwillbs.domain.MemberDTO;
+import com.itwillbs.domain.PageDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -120,11 +121,20 @@ public class MemberService {
 			System.out.println("유저 삭제 실패");
 		}
 	}// deleteMember()
-	
-	public ArrayList<MemberDTO> getMemberList() {
+	public int getMemberCount() {
+		int count=0;
+		try {
+			count = memberDAO.getMemberCount();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("유저수 조회 실패");
+		}
+		return count;
+	}
+	public ArrayList<MemberDTO> getMemberList(PageDTO pageDTO) {
 		ArrayList<MemberDTO> memberList = null;
 		try {
-			memberList = memberDAO.getMemberList();
+			memberList = memberDAO.getMemberList(pageDTO);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("유저 리스트 조회 실패");

@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import com.itwillbs.domain.MemberDTO;
+import com.itwillbs.domain.PageDTO;
 
 public class MemberDAO {
 	Connection conn;
@@ -100,12 +101,26 @@ public class MemberDAO {
 		dbClose();
 		return member;
 	}//getMember
-	public ArrayList<MemberDTO> getMemberList() throws SQLException{
-		ArrayList<MemberDTO> memberList = new ArrayList<MemberDTO>();
+	public int getMemberCount() throws SQLException {
 		int count=0;
-		String sql = "select id, pass, name, date from members;";
+		String sql = "select count(*) from members;";
 		connection();
 		pstmt = conn.prepareStatement(sql);
+		rs = pstmt.executeQuery();
+		if(rs.next()) {
+			count = rs.getInt("count(*)");
+		}
+		dbClose();
+		return count;
+	}
+	public ArrayList<MemberDTO> getMemberList(PageDTO pageDTO) throws SQLException{
+		ArrayList<MemberDTO> memberList = new ArrayList<MemberDTO>();
+		int count=0;
+		String sql = "select id, pass, name, date from members limit ?, ?;";
+		connection();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, pageDTO.getStartRow()-1);
+		pstmt.setInt(2, pageDTO.getPageSize());
 		rs = pstmt.executeQuery();
 		
 		while(rs.next() && rs != null){

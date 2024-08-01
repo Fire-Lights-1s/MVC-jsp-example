@@ -14,3 +14,6 @@
 1721702206603	Delete element
 1721702209338	Delete element
 1721787945880	Encapsulate field 'count'
+1721885746371	Encapsulate field 'totalPage'
+1721889259814	Encapsulate field 'pageCount'
+1721889343450	Rename field 'pageCount'

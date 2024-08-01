@@ -61,8 +61,23 @@ public class BoardController extends HttpServlet{
 			
 			BoardService boardService = new BoardService();
 			int count = boardService.getBoardCount();
+			
 			pageDTO.setCount(count);
-			pageDTO = boardService.getPageDTOStartEnd(pageDTO);
+			pageDTO = boardService.getPageDTOStartEndBoard(pageDTO);
+			
+			int pageBlock = 10;
+			int startPage = ((currentPage-1)/pageBlock)*pageBlock +1;
+			int endPage = ((currentPage-1)/pageBlock)*pageBlock+pageBlock;
+			if(pageDTO.getTotalPage() <startPage ) {
+				startPage = pageDTO.getTotalPage();
+			}
+			if(pageDTO.getTotalPage() <endPage ) {
+				endPage = pageDTO.getTotalPage();
+			}
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			
 			ArrayList<BoardDTO> boardList = boardService.getBoardList(pageDTO);
 			request.setAttribute("boardList", boardList);
 			request.setAttribute("pageDTO", pageDTO);

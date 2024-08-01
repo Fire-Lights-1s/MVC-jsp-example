@@ -47,7 +47,18 @@
 		</c:otherwise>
 	</c:choose>
 	<tr>
-		<td colspan="7"><a href="main.me">메인으로 돌아가기</a></td>
+		<td colspan="2"><a href="main.me">메인으로 돌아가기</a></td>
+		<td colspan="2">
+		<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+			<a  href="list.me?pageNum=${pageDTO.getStartPage()-pageDTO.pageBlock}"> 이전</a>
+		</c:if>
+		<c:forEach var="p" begin="${pageDTO.getStartPage()}" end="${pageDTO.getEndPage()}" step="1">
+			<a href="list.me?pageNum=${p}"> ${p} </a>
+		</c:forEach>
+		<c:if test="${pageDTO.endPage < pageDTO.totalPage }">
+			<a  href="list.me?pageNum=${pageDTO.getStartPage()+pageDTO.pageBlock}"> 다음</a>
+		</c:if>
+		</td>
 	</tr>
 	</table>
 </body>

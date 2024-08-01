@@ -50,16 +50,18 @@ public class BoardService {
 		}
 		return count;
 	}
-	public PageDTO getPageDTOStartEnd(PageDTO pageDTO) {
+	public PageDTO getPageDTOStartEndBoard(PageDTO pageDTO) {
 		PageDTO page = pageDTO; 
 		int pageSize = page.getPageSize();
-		int totalPage = (int) Math.ceil(page.getCount() / (double)pageSize);
 		int currentPage = page.getCurrentPage();
+		int totalPage = (int) Math.ceil(page.getCount() / (double)pageSize);
+		//page.getCount() + (pageSize - (page.getCount() % pageSize)) % pageSize
 		
 		if(totalPage < currentPage) {
 			currentPage = totalPage;
 			page.setCurrentPage(currentPage);
 		}
+		page.setTotalPage(totalPage);
 		page.setStartRow((currentPage-1)*pageSize + 1);
 		page.setEndRow(currentPage*pageSize);
 		

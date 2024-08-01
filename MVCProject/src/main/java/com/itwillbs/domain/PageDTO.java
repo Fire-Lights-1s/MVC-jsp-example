@@ -5,6 +5,10 @@ public class PageDTO {
 	private String pageNum;
 	private int currentPage;
 	private int count;
+	private int totalPage;
+	private int startPage;
+	private int endPage;
+	private int pageBlock;
 	
 	private int startRow;
 	private int endRow;
@@ -44,5 +48,60 @@ public class PageDTO {
 	}
 	public void setCount(int count) {
 		this.count = count;
+	}
+	public int getStartPage() {
+		return startPage;
+	}
+	public void setStartPage(int startPage) {
+		this.startPage = startPage;
+	}
+	public int getEndPage() {
+		return endPage;
+	}
+	public void setEndPage(int endPage) {
+		this.endPage = endPage;
+	}
+	public int getTotalPage() {
+		return totalPage;
+	}
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+	public int getPageBlock() {
+		return pageBlock;
+	}
+	public void setPageBlock(int pageCount) {
+		this.pageBlock = pageCount;
+	}
+	public PageDTO getStartEndRow(PageDTO pageDTO) {
+		int pageSize = pageDTO.getPageSize();
+		int currentPage = pageDTO.getCurrentPage();
+		int totalPage = (int) Math.ceil(pageDTO.getCount() / (double)pageSize);
+		//page.getCount() + (pageSize - (page.getCount() % pageSize)) % pageSize
+		
+		if(totalPage < currentPage) {
+			currentPage = totalPage;
+			pageDTO.setCurrentPage(currentPage);
+		}
+		pageDTO.setTotalPage(totalPage);
+		pageDTO.setStartRow((currentPage-1)*pageSize + 1);
+		pageDTO.setEndRow(currentPage*pageSize);
+		
+		return pageDTO;
+	}
+	public PageDTO getStartEndPage(PageDTO pageDTO) {
+		int pageBlock = pageDTO.getPageBlock();
+		int currentPage = pageDTO.getCurrentPage();
+		int startPage = ((currentPage-1)/pageBlock)*pageBlock +1;
+		int endPage = ((currentPage-1)/pageBlock)*pageBlock+pageBlock;
+		if(pageDTO.getTotalPage() <startPage ) {
+			startPage = pageDTO.getTotalPage();
+		}
+		if(pageDTO.getTotalPage() <endPage ) {
+			endPage = pageDTO.getTotalPage();
+		}
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		return pageDTO;
 	}
 }

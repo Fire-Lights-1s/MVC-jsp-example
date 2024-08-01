@@ -1,0 +1,16 @@
+127.0.0.1 - - [29/Jul/2024:13:58:31 +0900] "GET / HTTP/1.1" 404 808
+0:0:0:0:0:0:0:1 - - [29/Jul/2024:13:58:32 +0900] "GET /MVCProject/ HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [29/Jul/2024:13:58:32 +0900] "GET /MVCProject/main.me HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [29/Jul/2024:13:58:32 +0900] "GET /MVCProject/login.me HTTP/1.1" 200 613
+0:0:0:0:0:0:0:1 - - [29/Jul/2024:13:58:32 +0900] "GET /MVCProject/css/table.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [29/Jul/2024:13:58:32 +0900] "GET /favicon.ico HTTP/1.1" 404 819
+0:0:0:0:0:0:0:1 - - [29/Jul/2024:13:58:48 +0900] "POST /MVCProject/loginPro.me HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [29/Jul/2024:13:58:48 +0900] "GET /MVCProject/main.me HTTP/1.1" 200 939
+0:0:0:0:0:0:0:1 - - [29/Jul/2024:13:58:51 +0900] "GET /MVCProject/list.bo HTTP/1.1" 200 1454
+0:0:0:0:0:0:0:1 - - [29/Jul/2024:13:58:54 +0900] "GET /MVCProject/list.bo?pageNum=4 HTTP/1.1" 200 1354
+0:0:0:0:0:0:0:1 - - [29/Jul/2024:13:58:55 +0900] "GET /MVCProject/list.bo?pageNum=1 HTTP/1.1" 200 1454
+0:0:0:0:0:0:0:1 - - [29/Jul/2024:14:01:45 +0900] "GET /MVCProject/list.bo?pageNum=4 HTTP/1.1" 200 1354
+0:0:0:0:0:0:0:1 - - [29/Jul/2024:14:01:46 +0900] "GET /MVCProject/list.bo?pageNum=1 HTTP/1.1" 200 1454
+0:0:0:0:0:0:0:1 - - [29/Jul/2024:14:30:23 +0900] "GET /MVCProject/main.me HTTP/1.1" 200 939
+0:0:0:0:0:0:0:1 - - [29/Jul/2024:14:30:26 +0900] "GET /MVCProject/list.me HTTP/1.1" 200 1041
+0:0:0:0:0:0:0:1 - - [29/Jul/2024:14:30:26 +0900] "GET /MVCProject/css/table.css?after HTTP/1.1" 200 976
